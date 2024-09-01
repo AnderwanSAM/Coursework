@@ -1,0 +1,22 @@
+ANDIE SAMADOULOUGOU 
+300209487  
+LAB 5 CSI 2520
+
+
+Exercice 1
+
+1)
+
+Solution : Version 1
+
+on_time(H1 : _M1, D, A) :-
+ flight(D, A, H2 : _M2, _H3 : _M3),H2 - H1 > 1.
+on_time(H1 : M1, D, A) :-
+ flight(D, A, H2 : M2, _H3 : _M3),
+ H2 - H1 =:= 1, MM is 60 - M1, MM + M2 >= 60.
+
+2)
+
+
+
+Exercice 2

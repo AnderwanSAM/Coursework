@@ -1,0 +1,62 @@
+<?php
+
+
+if (!isset($_GET["id"])) {
+    header('Location: index.php');
+    exit;
+}
+
+$competitionId = $_GET["id"];
+$dbconn = pg_connect("host=localhost port=5432 dbname=leaderboard  user=postgres password=Avenirottawa@1");
+$sql = 'SELECT * FROM competitions WHERE identifier = $1';
+$result = pg_query_params($dbconn, $sql, [$competitionId]);
+$data = pg_fetch_all($result);
+
+if (empty($data)) {
+  $competition = null;
+  $athletes = [];
+} else {
+  $competition = $data[0];
+  $sql = 'SELECT * FROM competitions_list';
+  $result = pg_query_params($dbconn, $sql, [$competition["id"]]);
+  $athletes = pg_fetch_all($result);
+}
+
+if (empty($competition)) {
+  ?><h1>Unknown competiton <?php echo $competitionId; ?></h1><?php
+} elseif (empty($athletes)) {
+  ?><h1>No athletes registered for <?php echo $competition["name"]; ?></h1><?php
+} else {
+  ?>
+    <style>
+    .table-container {
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+    }
+    table tr th {
+      text-align: left;
+      background-color: #D9E2EC;
+    }
+    </style>
+
+    <h1><?php echo $competition["competition_id"]; ?></h1>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>id</th>
+        </tr>
+        <?php foreach ($athletes as $row) {?>
+          <tr>
+            <td><?php echo $row["athletes_id"] ?></td>
+            <td><?php echo $row["competition_id"] ?></td>
+            <td><?php echo $row["competition_points"] ?></td>
+          </tr>
+        <?php } ?>
+      </table>
+    </div>
+  <?php
+}

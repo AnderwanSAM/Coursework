@@ -1,0 +1,44 @@
+<?php
+
+$name = $_POST["name"];
+$username = $_POST["username"];
+$password = $_POST["password"];
+
+$dbconn = pg_connect("host=localhost port=5432 dbname=$name  user=$username password=$password") or die('failed');
+
+$result = pg_query($dbconn, "SELECT athletes_id, competition_id,competition_points,ski,race,body_building  FROM board 
+ORDER BY competition_points DESC");
+$data = pg_fetch_all($result);
+?>
+
+<style>
+.table-container {
+  margin: 20px;
+}
+table {
+  width: 100%;
+}
+table tr th {
+  text-align: left;
+  background-color: #D9E2EC;
+}
+</style>
+
+<h1>Competitions</h1>
+<div class="table-container">
+  <table>
+    <tr>
+       <th>athletes_id</th>
+          <th>competition_id</th>
+          <th>competition_points</th>
+           <th>SKI</th>
+            <th>Race</th>
+              <th>Body Building</th>
+    </tr>
+    <?php foreach ($data as $row) {?>
+      <tr>
+        <td><a href="leaderboard.php?athletes_id=<?php echo $row["athletes_id"] ?>"><?php echo $row["competition_id"] ?>"><?php echo $row["competition_points"] ?>"><?php echo $row["ski"] ?>"><?php echo $row["race"] ?>"><?php echo $row["body_building"] ?></a></td>
+      </tr>
+    <?php } ?>
+  </table>
+</div>

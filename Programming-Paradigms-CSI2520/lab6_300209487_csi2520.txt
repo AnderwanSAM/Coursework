@@ -1,0 +1,20 @@
+Lab6
+
+Question1 
+ Le programme repete la valeur N entrée de facon infinie. 
+Cela est causé par repeat. 
+Voici une peroposition de solution : 
+decompte(N):- writeln(N), V is N-1, V>=0,decompte(V),!. 
+
+Question 2
+element(chlore,'Cl').
+element(helium,'He').
+element(hydrogene,'H').
+element(azote,'N').
+element(oxygene,'O').
+
+
+start:- write("Donnez-moi un symbole, N'oubliez pas les ' ' autour du symbole :"),nl,
+    read(X),
+    element(Y,X),
+    write(X),write("est le symbole pour : "), write(Y),nl, start.

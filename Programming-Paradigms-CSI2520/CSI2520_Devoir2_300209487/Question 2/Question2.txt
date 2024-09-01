@@ -1,0 +1,23 @@
+a)
+% Question 2 – a  : Determiner le nombre de vitres adjacentes 
+% trouver la longueur de la liste 
+list_size([], 0 ).
+list_size([_|Xs], L ) :- list_size(Xs,N) , L is N+1 .
+% predicat 
+% trouver les elements et les compter
+neighbors(G,N):- integer(N), bagof(B,adj(G,B),X), bagof(B,adj(B,G),Y), L =[X|Y], list_size(L,N).
+
+b)
+
+% Question 2 – b : 
+% Écrire le prédicat permettant de trouver
+%  la liste des vitres adjacentes à une certaine vitre.
+neighbors(G,L) :- bagof(B,adj(G,B),X), bagof(B,adj(B,G),Y), L =[X|Y].
+
+c)
+% Question 2- c : c) Écrire le prédicat permettant de 
+% trouver si 2 vitres ont un voisin en commun.
+same_neighbor(G,I,N):- adj(G,N) , adj(I,N).
+same_neighbor(G,I,N):- adj(N,G) , adj(N,I).
+same_neighbor(G,I,N):- adj(G,N) , adj(N,I).
+same_neighbor(G,I,N):- adj(N,G) , adj(I,N).

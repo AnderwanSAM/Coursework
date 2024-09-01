@@ -1,0 +1,21 @@
+Lab7 
+
+Question 1 
+
+maxmin([],Max,Min):- write("Liste vide"),!.
+maxmin([A],Max,Min):-  Max = A, Min = A,!.
+% trouver le maximum 
+findmax([],Max).
+findmax([T,Q],Max):- T > Q, Max = T.
+findmax([T,Q],Max):- T < Q, Max = Q.
+findmax([T|Q],Max) :- Q =[X|Y], T>X ,findmax([T|Y],TEMP), Max = TEMP,!.
+findmax([T|Q],Max) :- Q =[X|Y], T<X ,findmax(Q,TEMP), Max = TEMP,!.
+%trouver le minimum 
+findmin([],Max).
+findmin([T,Q],Min):- T < Q, Min = T.
+findmin([T,Q],Min):- T > Q, Min = Q.
+findmin([T|Q],Min) :- Q =[X|Y], T>X ,findmin(Q,TEMP), Min = TEMP,!.
+findmin([T|Q],Min) :- Q =[X|Y], T<X ,findmin([T|Y],TEMP), Min = TEMP,!.
+% completer le predicat maxmin
+
+maxmin(L,Max,Min):- findmax(L,Max), findmin(L,Min).

@@ -1,0 +1,90 @@
+<?php
+
+
+
+if (!isset($_GET["id"])) {
+    header('Location: index.php');
+    exit;
+}
+
+
+
+$name = $_POST["name"];
+$username = $_POST["username"];
+$password = $_POST["password"];
+
+$dbconn = pg_connect("host=localhost port=5432 dbname=$name  user=$username password=$password") or die('failed');
+
+$sql = 'SELECT * FROM competitions WHERE identifier = $1';
+$result = pg_query_params($dbconn, $sql, [$competitionId]);
+$data = pg_fetch_all($result);
+
+
+if (empty($data)) {
+  $competition = null;
+  $athletes = [];
+} else {
+  $competition = $data[0];
+  $sql = 'SELECT id , name , start_date , end_date , entreprise_name FROM competitions';
+  $result = pg_query_params($dbconn, $sql, [$competition["id"]]);
+  $athletes = pg_fetch_all($result);
+}
+
+?>
+
+<!--
+
+if (empty($competition)) {
+  ?><h1>Unknown competiton <?php echo $competitionId; ?></h1><?php
+} elseif (empty($athletes)) {
+  ?><h1>No athletes registered for <?php echo $competition["name"]; ?></h1><?php
+} else {
+  ?>
+    <style>
+    .table-container {
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+    }
+    table tr th {
+      text-align: left;
+      background-color: #D9E2EC;
+    }
+    </style>
+
+    <h1><?php echo $competition["name"]; ?></h1>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>id</th>
+        </tr>
+        <?php foreach ($athletes as $row) {?>
+          <tr>
+            <td><?php echo $row["name"] ?></td>
+            <td><?php echo $row["gender"] ?></td>
+            <td><?php echo $row["id"] ?></td>
+          </tr>
+        <?php } ?>
+      </table>
+    </div>
+     <br><br>
+ <form action="registerPartener.php" method="get">
+
+   <button name="INSCRIPTION" type="submit" value=".$my_name">Enregistrer une compagnie partenaire </button>
+   <br>
+ </form>
+ <br><br>
+ <form action="registerAthletes.php" method="post">
+   <button name="INSCRIPTION" type="submit" value="CSS">Enregistrer un athlete</button>
+ </form>>
+<br><br>
+ <form action="CreerCompetition.php" method="get">
+   <button name="INSCRIPTION" type="submit" value=".$my_name">Creer une competition </button>
+   <br>
+ </form>
+
+-->
+

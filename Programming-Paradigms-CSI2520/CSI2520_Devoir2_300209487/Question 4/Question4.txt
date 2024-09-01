@@ -1,0 +1,14 @@
+Question 4 : 
+
+% Reponse 
+
+% Trouver toutes les notes obtenues lors de l'evaluation
+marks(Course,Evaluation,L):- findall(N,mark(Course,_,Evaluation,N),L).
+% Trouver la taille de la liste contenant les notes 
+list_size([], 0 ).
+list_size([_|Xs], L ) :- list_size(Xs,N) , L is N+1 .
+% Caluler la somme des elements de la liste 
+sommer([], 0) :- !.
+sommer([T|Q], Somme) :- sommer(Q, S),Somme is T + S.
+% calculer la moyenne de l'evaluation 
+averageMark(Course,Evaluation,Avg) :- marks(Course,Evaluation,L),list_size(L,N) ,sommer(L,Somme),evaluation(Course,Evaluation,Max),Avg is  ((Somme/N)/Max)*100.

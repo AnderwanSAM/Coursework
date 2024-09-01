@@ -1,0 +1,83 @@
+Andie SAMADOULOUGOU 300209487 CSI 2520 LAB4
+
+
+1) 
+?- professeur(codd, Cours), etudiant(UnEtudiant, Cours).
+La requete demande les  cours offert par le professeur cood et les etudiants suivant ces cours 
+
+
+2) toutes les solutions qui seront obtenues, dans l’ordre ou elles seront trouvées 
+
+
+
+Resultat de : ?- professeur(codd, Cours), etudiant(UnEtudiant, Cours).  
+est : 
+Cours = csi4533,
+UnEtudiant = paul
+Cours = csi2530,
+UnEtudiant = henri
+
+3) Ecrire la requête permettant de trouver les étudiants de minsky
+
+?- professeur(minsky, Cours), etudiant(UnEtudiant, Cours).
+Resultat :
+Cours = csi2510,
+UnEtudiant = jean
+Cours = csi2510,
+UnEtudiant = henri
+
+
+4) la requête permettant de trouver les cours suivis par des étudiants de 4ème année : 
+
+?- annee(Student , 4) , etudiant(Student , Cours).
+
+
+5)Ecrire la requête permettant de trouver les étudiants qui ont le même professeur :
+
+?- professeur(Prof, Cours), etudiant(Student, Cours).
+
+Resultat: 
+Cours = csi2520,
+Prof = turing,
+Student = fred
+Cours = csi4533,
+Prof = codd,
+Student = paul
+Cours = csi2772,
+Prof = ritchie,
+Student = jean
+Cours = csi2510,
+Prof = minsky,
+Student = jean
+Cours = csi2510,
+Prof = minsky,
+Student = henri
+Cours = csi2530,
+Prof = codd,
+Student = henri
+
+
+6) Création d'un prédicat 'note' donnant le résultat obtenu par un étudiant dans un cours. Les notes
+possibles sont a,b,c,d,e, f.
+
+
+note(fred, csi2520, a).
+note(paul, csi4533, b).
+note(jean, csi2510, d).
+note(jean, csi2772, b).
+note(henri, csi2510, f).
+note(henri , csi2530, e).
+
+
+7) Ecrire un prédicat 'reussit(etudiant,cours)' vérifiant si un étudiant a passé un cours, ce
+prédicat doit vérifier si : 
+a. l'étudiant est inscrit à ce cours  
+b. et s’il a obtenu une note autre que e ou f
+
+reussit(Student, Cours) :- etudiant(Student,Cours) , note(Student,Cours,a); 
+note(Student,Cours,b); note(Student,Cours,c); note(Student,Cours,d).
+
+
+
+
+

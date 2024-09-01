@@ -1,0 +1,65 @@
+
+$name = $_POST["name"];
+$username = $_POST["username"];
+$password = $_POST["password"];
+
+$dbconn = pg_connect("host=localhost port=5432 dbname=$name  user=$username password=$password") or die('failed');
+
+$sql = 'SELECT * FROM competitions WHERE identifier = $1';
+$result = pg_query_params($dbconn, $sql, [$competitionId]);
+$data = pg_fetch_all($result);
+
+==============
+
+
+
+<?php
+
+
+
+
+$name = $_POST["name"];
+$username = $_POST["username"];
+$password = $_POST["password"];
+
+$dbconn = pg_connect("host=localhost port=5432 dbname=$name  user=$username password=$password") or die('failed');
+
+$sql = 'SELECT * FROM competitions';
+$result = pg_query($dbconn, $sql);
+$data = pg_fetch_all($result);
+
+echo "hey";
+print_r($data);
+
+
+
+?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PAGE 2</title>
+</head>
+<body>
+      <br><br>
+ <form action="registerPartener.php" method="get">
+
+   <button name="INSCRIPTION" type="submit" value=".$my_name">Enregistrer une compagnie partenaire </button>
+   <br>
+ </form>
+ <br><br>
+ <form action="registerAthletes.php" method="post">
+   <button name="INSCRIPTION" type="submit" value="CSS">Enregistrer un athlete</button>
+ </form>>
+<br><br>
+ <form action="CreerCompetition.php" method="get">
+   <button name="INSCRIPTION" type="submit" value=".$my_name">Creer une competition </button>
+   <br>
+ </form>
+
+
+
+</body>
+</html>

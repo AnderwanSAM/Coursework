@@ -1,0 +1,4 @@
+Question 1
+https://play.golang.org/p/eHdYSP7SzVW
+
+Question2
